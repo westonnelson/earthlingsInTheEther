@@ -9,9 +9,17 @@ import Sectionhead from "@components/sectionhead.astro";
 const publishedTeamMembers = await getCollection("team", ({ data }) => {
   return !data.draft && data.publishDate < new Date();
 });
+
+const identity = {
+  firstName: "Weston",
+  country: "USA",
+  hobbies: ["photography" , "baseball"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 ---
 
-<Layout title="About">
+<Layout title="About Earthlings">
   <Container>
     <Sectionhead>
       <Fragment slot="title">About</Fragment>
@@ -22,11 +30,7 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
       <h2 class="font-bold text-3xl text-gray-800">
         Empowering the world with NFTs
       </h2>
-      <p class="text-lg leading-relaxed text-slate-500">
-        We're a multi-cultural team from around the world! We come from diverse
-        backgrounds, bringing different personalities, experiences and skills to
-        the job. This is what makes our team so special.
-      </p>
+     
     </div>
     <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-4xl mt-12">
       {
@@ -60,3 +64,15 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
     </div>
   </Container>
 </Layout>
+<p>Here are a few facts about me:</p>
+<ul>
+  <li>My name is {identity.firstName}.</li>
+  <li>I live in {identity.country} </li>
+  {identity.hobbies.length >= 2 && 
+    <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+  } 
+</ul>
+<p>My skills are:</p>
+<ul>
+  {skills.map((skill) => <li>{skill}</li>)}
+</ul>
